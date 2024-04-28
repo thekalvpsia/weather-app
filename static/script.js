@@ -12,14 +12,16 @@ document.getElementById('weatherForm').addEventListener('submit', function(e) {
                 weatherResult.innerHTML = `<p>Error: ${data.error}</p>`;
             } else {
                 weatherResult.innerHTML = `
-                    <h2>${data.city}</h2>
-                    <p>${data.time}</p>
-                    <p>${data.date}</p>
-                    <p>Temperature: ${data.temperature}°F</p>
-                    <p>Description: ${data.description}</p>
-                    <p>Humidity: ${data.humidity}%</p>
-                    <p>Pressure: ${data.pressure} hPa</p>
-                    <p>Wind Speed: ${data.wind_speed} mph</p>
+                    <div class="city-name">${data.city}</div>
+                    <div class="time">${data.time}</div>
+                    <div class="date">${data.date}</div>
+                    <div class="temperature">${data.temperature}°F</div>
+                    <div class="details">
+                        <p class="detail-item">Description: <span>${data.description}</span></p>
+                        <p class="detail-item">Humidity: <span>${data.humidity}%</span></p>
+                        <p class="detail-item">Pressure: <span>${data.pressure} hPa</span></p>
+                        <p class="detail-item">Wind Speed: <span>${data.wind_speed} mph</span></p>
+                    </div>
                 `;
                 weatherResult.classList.add('result-shown');
             }
