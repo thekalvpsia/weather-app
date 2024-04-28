@@ -1,13 +1,18 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import requests
 from dotenv import load_dotenv
 import os
 
 app = Flask(__name__)
 
+# Load environment variables from .env file
 load_dotenv()
 
 API_KEY = os.getenv('OPENWEATHERMAP_API_KEY')
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.route('/weather', methods=['GET'])
 def get_weather():
