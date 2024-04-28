@@ -30,7 +30,44 @@ document.getElementById('weatherForm').addEventListener('submit', function(e) {
                         <p class="detail-item">Humidity: <span>${data.humidity}%</span></p>
                         <p class="detail-item">Wind: <span>${data.wind_speed} mph</span></p>
                     </div>
+                    <canvas id="forecastChart"></canvas>
                 `;
+                const ctx = document.getElementById('forecastChart').getContext('2d');
+                const forecastChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data.forecasts.map(f => f.time),
+                        datasets: [{
+                            label: 'Temperature Forecast',
+                            data: data.forecasts.map(f => f.temperature),
+                            fill: false,
+                            borderColor: 'white',
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                ticks: {
+                                    stepSize: 1,
+                                    callback: function(value) {
+                                        if (value % 1 === 0) {
+                                            return value;
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: 'white'
+                                }
+                            }
+                        }
+                    }
+                });
                 setTimeout(() => {
                     weatherResult.classList.add('result-shown');
                 }, 100);
