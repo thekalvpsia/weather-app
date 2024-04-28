@@ -18,9 +18,9 @@ document.getElementById('weatherForm').addEventListener('submit', function(e) {
                     <div class="temperature">${data.temperature}°F</div>
                     <div class="details">
                         <p class="detail-item">Description: <span>${data.description}</span></p>
+                        <p class="detail-item">Precipitation: <span>${data.precipitation} mm</span></p>
                         <p class="detail-item">Humidity: <span>${data.humidity}%</span></p>
-                        <p class="detail-item">Pressure: <span>${data.pressure} hPa</span></p>
-                        <p class="detail-item">Wind Speed: <span>${data.wind_speed} mph</span></p>
+                        <p class="detail-item">Wind: <span>${data.wind_speed} mph</span></p>
                     </div>
                 `;
                 weatherResult.classList.add('result-shown');

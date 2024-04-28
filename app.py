@@ -32,6 +32,13 @@ def get_weather():
 
     data = response.json()
     lat, lon = data['coord']['lat'], data['coord']['lon']
+
+    # Get precipitation data, checking for rain or snow
+    precipitation = 0
+    if 'rain' in data and '1h' in data['rain']:
+        precipitation = data['rain']['1h']  # Rainfall in mm
+    elif 'snow' in data and '1h' in data['snow']:
+        precipitation = data['snow']['1h']  # Snowfall in mm
     
     # Find the timezone of the given coordinates
     timezone_str = tf.timezone_at(lat=lat, lng=lon)
@@ -51,8 +58,8 @@ def get_weather():
         'date': date_str,
         'temperature': temperature,
         'description': data['weather'][0]['description'],
+        'precipitation': precipitation,
         'humidity': data['main']['humidity'],
-        'pressure': data['main']['pressure'],
         'wind_speed': wind_speed
     }
 
