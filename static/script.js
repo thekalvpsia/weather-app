@@ -2,14 +2,22 @@ document.getElementById('weatherForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const city = document.getElementById('cityInput').value;
     const weatherResult = document.getElementById('weatherResult');
+    weatherResult.style.opacity = '0';
     weatherResult.classList.remove('result-shown');
     weatherResult.innerHTML = '';
     
     fetch(`/weather?city=${encodeURIComponent(city)}`)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(errData => {
+                    throw new Error(errData.message || 'Error fetching weather data.');
+                });
+            }
+            return response.json();
+        })
         .then(data => {
             if (data.error) {
-                weatherResult.innerHTML = `<p>Error: ${data.error}</p>`;
+                throw new Error(data.error);
             } else {
                 weatherResult.innerHTML = `
                     <div class="city-name">${data.city}</div>
@@ -23,10 +31,13 @@ document.getElementById('weatherForm').addEventListener('submit', function(e) {
                         <p class="detail-item">Wind: <span>${data.wind_speed} mph</span></p>
                     </div>
                 `;
-                weatherResult.classList.add('result-shown');
+                setTimeout(() => {
+                    weatherResult.classList.add('result-shown');
+                }, 100);
             }
         })
         .catch(error => {
-            document.getElementById('weatherResult').innerHTML = `<p>Error fetching weather data.</p>`;
+            weatherResult.innerHTML = `<p class="error-message">${error.message}</p>`;
+            weatherResult.classList.add('result-shown');
         });
 });

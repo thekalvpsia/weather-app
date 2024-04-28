@@ -20,6 +20,7 @@ body {
     align-items: center;
     text-align: center;
     padding: 20px;
+    animation: fadeIn 1s ease-out forwards;
 }
 
 .container {
@@ -77,6 +78,7 @@ button:hover {
     width: 80%;
     max-width: 400px;
     transition: all 0.3s ease-in-out;
+    opacity: 0;
 }
 
 .city-name {
@@ -115,7 +117,6 @@ button:hover {
     color: #ffffff;
 }
 
-/* Add responsiveness for smaller screens */
 @media (max-width: 768px) {
     body {
         padding: 10px;
@@ -133,4 +134,19 @@ button:hover {
         width: 90%;
         margin-top: 1.5rem;
     }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.result-shown {
+    animation: fadeIn 0.5s ease-out forwards;
 }
