@@ -112,7 +112,7 @@ button:hover {
 .temperature {
     font-size: 3rem;
     font-weight: bold;
-    margin: 20px 0;
+    margin-bottom: 20px;
     color: #fff;
 }
 
@@ -123,7 +123,7 @@ button:hover {
 }
 
 .detail-item {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     color: #cccccc;
     font-size: 1rem;
 }
@@ -189,4 +189,9 @@ button:hover {
     background-color: #888;
     border-radius: 6px;
     border: 3px solid #121212;
+}
+
+.weather-icon img {
+    width: 100px;
+    height: auto;
 }
