@@ -68,7 +68,8 @@ def get_weather():
         'precipitation': precipitation,
         'humidity': current_data['main']['humidity'],
         'wind_speed': round(current_data['wind']['speed']),
-        'forecasts': forecasts
+        'forecasts': forecasts,
+        'icon': current_data['weather'][0]['icon']
     }
 
     return jsonify(weather)

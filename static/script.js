@@ -23,6 +23,9 @@ document.getElementById('weatherForm').addEventListener('submit', function(e) {
                     <div class="city-name">${data.city}</div>
                     <div class="time">${data.time}</div>
                     <div class="date">${data.date}</div>
+                    <div class="weather-icon">
+                        <img src="http://openweathermap.org/img/wn/${data.icon.replace('d', 'n')}@2x.png" alt="${data.description}">
+                    </div>
                     <div class="temperature">${data.temperature}°F</div>
                     <div class="details">
                         <p class="detail-item">Description: <span>${data.description}</span></p>
@@ -38,7 +41,7 @@ document.getElementById('weatherForm').addEventListener('submit', function(e) {
                     data: {
                         labels: data.forecasts.map(f => f.time),
                         datasets: [{
-                            label: 'Temperature Forecast',
+                            label: 'Temperature',
                             data: data.forecasts.map(f => f.temperature),
                             fill: false,
                             borderColor: 'white',
